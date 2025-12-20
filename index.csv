@@ -1,0 +1,261 @@
+Sectoral Index,Company Name,Symbol
+NIFTY IT,Tata Consultancy Services Ltd,TCS
+NIFTY IT,Infosys Ltd,INFY
+NIFTY IT,HCL Technologies Ltd,HCLTECH
+NIFTY IT,Wipro Ltd,WIPRO
+NIFTY IT,LTIMindtree Ltd,LTIM
+NIFTY IT,Tech Mahindra Ltd,TECHM
+NIFTY IT,Persistent Systems Ltd,PERSISTENT
+NIFTY IT,Coforge Ltd,COFORGE
+NIFTY IT,Mphasis Ltd,MPHASIS
+NIFTY IT,Oracle Financial Services Software Ltd,OFSS
+NIFTY Auto,Maruti Suzuki India Ltd,MARUTI
+NIFTY Auto,Mahindra & Mahindra Ltd,M&M
+NIFTY Auto,Bajaj Auto Ltd,BAJAJ-AUTO
+NIFTY Auto,Eicher Motors Ltd,EICHERMOT
+NIFTY Auto,TVS Motor Company Ltd,TVSMOTOR
+NIFTY Auto,Tata Motors Ltd,TATAMOTORS
+NIFTY Auto,Hero MotoCorp Ltd,HEROMOTOCO
+NIFTY Auto,Samvardhana Motherson Int'l Ltd,SAMVARDHANA
+NIFTY Auto,Bosch Ltd,BOSCHLTD
+NIFTY Auto,Ashok Leyland Ltd,ASHOKLEY
+NIFTY Auto,Bharat Forge Ltd,BHARATFORG
+NIFTY Auto,Tube Investments of India Ltd,TIINDIA
+NIFTY Auto,Uno Minda Ltd,UNOMINDA
+NIFTY Auto,Exide Industries Ltd,EXIDEIND
+NIFTY Auto,Sona BLW Precision Forgings Ltd,SONACOMS
+NIFTY Pharma,Sun Pharmaceutical Industries Ltd,SUNPHARMA
+NIFTY Pharma,Divi's Laboratories Ltd,DIVISLAB
+NIFTY Pharma,Torrent Pharmaceuticals Ltd,TORNTPHARM
+NIFTY Pharma,Cipla Ltd,CIPLA
+NIFTY Pharma,Dr. Reddy's Laboratories Ltd,DRREDDY
+NIFTY Pharma,Lupin Ltd,LUPIN
+NIFTY Pharma,Zydus Lifesciences Ltd,ZYDUSLIFE
+NIFTY Pharma,Mankind Pharma Ltd,MANKINDPH
+NIFTY Pharma,Aurobindo Pharma Ltd,AUROPHARMA
+NIFTY Pharma,Alkem Laboratories Ltd,ALKEM
+NIFTY Pharma,Abbott India Ltd,ABBOTTIND
+NIFTY Pharma,Laurus Labs Ltd,LAURUSLABS
+NIFTY Pharma,Glenmark Pharmaceuticals Ltd,GLENMARK
+NIFTY Pharma,Biocon Ltd,BIOCON
+NIFTY Pharma,Ipca Laboratories Ltd,IPCALAB
+NIFTY Pharma,Ajanta Pharma Ltd,AJANPHARMA
+NIFTY Pharma,Gland Pharma Ltd,GLAND
+NIFTY Pharma,JB Chemicals & Pharmaceuticals Ltd,JBCP
+NIFTY Pharma,Piramal Pharma Ltd,PIRAMALPH
+NIFTY Pharma,Wockhardt Ltd,WOCKPHARMA
+NIFTY FMCG,Hindustan Unilever Ltd,HINDUNILVR
+NIFTY FMCG,ITC Ltd,ITC
+NIFTY FMCG,Nestlé India Ltd,NESTLEIND
+NIFTY FMCG,Varun Beverages Ltd,VBL
+NIFTY FMCG,Britannia Industries Ltd,BRITANNIA
+NIFTY FMCG,Godrej Consumer Products Ltd,GODREJCP
+NIFTY FMCG,Tata Consumer Products Ltd,TATACONSUM
+NIFTY FMCG,United Spirits Ltd,UNITDSPRIT
+NIFTY FMCG,Marico Ltd,MARICO
+NIFTY FMCG,Dabur India Ltd,DABUR
+NIFTY FMCG,Patanjali Foods Ltd,PATANJALI
+NIFTY FMCG,Colgate-Palmolive (India) Ltd,COLPAL
+NIFTY FMCG,United Breweries Ltd,UBL
+NIFTY FMCG,Radico Khaitan Ltd,RADICO
+NIFTY FMCG,Emami Ltd,EMAMILTD
+NIFTY Financial Services,HDFC Life Insurance Co Ltd,HDFCLIFE
+NIFTY Financial Services,Bajaj Finance Ltd,BAJFINANCE
+NIFTY Financial Services,SBI Life Insurance Co Ltd,SBILIFE
+NIFTY Financial Services,ICICI Pru Life Insurance Co Ltd,ICICIPRULI
+NIFTY Financial Services,Shriram Finance Ltd,SHRIRAMFIN
+NIFTY Financial Services,Max Financial Services Ltd,MFSL
+NIFTY Financial Services,Power Finance Corporation Ltd,PFC
+NIFTY Financial Services,REC Ltd,RECLTD
+NIFTY Financial Services,Cholamandalam Inv & Fin Co,CHOLAFIN
+NIFTY Financial Services,Muthoot Finance Ltd,MUTHOOTFIN
+NIFTY Financial Services,Bajaj Finserv Ltd,BAJAJFINSV
+NIFTY Metal,Tata Steel Ltd,TATASTEEL
+NIFTY Metal,Hindalco Industries Ltd,HINDALCO
+NIFTY Metal,JSW Steel Ltd,JSWSTEEL
+NIFTY Metal,Vedanta Ltd,VEDANTA
+NIFTY Metal,Hindustan Zinc Ltd,HINDZINC
+NIFTY Metal,NMDC Ltd,NMDC
+NIFTY Metal,Steel Authority of India Ltd,SAIL
+NIFTY Metal,Ratnamani Metals & Tubes Ltd,RATNAMANI
+NIFTY Metal,Apar Industries Ltd,APARINDS
+NIFTY Metal,National Aluminium Co Ltd,NATIONALUM
+NIFTY Metal,Welspun Corp Ltd,WELCORP
+NIFTY Metal,Adani Enterprises Ltd,ADANIENT
+NIFTY Metal,Godawari Power & Ispat Ltd,GPIL
+NIFTY Metal,Gravita India Ltd,GRAVITA
+NIFTY Metal,Jindal Stainless Ltd,JINDALSTEL
+NIFTY Energy,NTPC Ltd,NTPC
+NIFTY Energy,Power Grid Corporation of India Ltd,POWERGRID
+NIFTY Energy,Tata Power Co Ltd,TATAPOWER
+NIFTY Energy,Adani Green Energy Ltd,ADANIGREEN
+NIFTY Energy,Bharat Petroleum Corporation Ltd,BPCL
+NIFTY Energy,NHPC Ltd,NHPC
+NIFTY Realty,DLF Ltd,DLF
+NIFTY Realty,Macrotech Developers Ltd,LODHA
+NIFTY Realty,Godrej Properties Ltd,GODREJPROP
+NIFTY Realty,Oberoi Realty Ltd,OBEROIRLTY
+NIFTY Realty,Prestige Estates Projects Ltd,PRESTIGE
+NIFTY Realty,Phoenix Mills Ltd,PHOENIXLTD
+NIFTY Realty,Brigade Enterprises Ltd,BRIGADE
+NIFTY Realty,Sunteck Realty Ltd,SUNTECK
+NIFTY Realty,Sobha Ltd,SOBHA
+NIFTY Realty,Indiabulls Real Estate Ltd,IBREALEST
+NIFTY Media,Sun TV Network Ltd,SUNTV
+NIFTY Media,Prime Focus Ltd,PFOCUS
+NIFTY Media,PVR Inox Ltd,PVRINOX
+NIFTY Media,Nazara Technologies Ltd,NAZARA
+NIFTY Media,Zee Entertainment Enterprises Ltd,ZEEL
+NIFTY Media,Saregama India Ltd,SAREGAMA
+NIFTY Media,Tips Music Ltd,TIPSMUSIC
+NIFTY Media,Network18 Media & Inv Ltd,NETWORK18
+NIFTY Media,DB Corp Ltd,DBCORP
+NIFTY Media,Hathway Cable & Datacom Ltd,HATHWAY
+NIFTY Healthcare,Max Healthcare Institute Ltd,MAXHEALTH
+NIFTY Healthcare,Apollo Hospitals Enterprise Ltd,APOLLOHOSP
+NIFTY Healthcare,Fortis Healthcare Ltd,FORTIS
+NIFTY Healthcare,Syngene International Ltd,SYNGENE
+NIFTY Consumer Durables,Titan Company Ltd,TITAN
+NIFTY Consumer Durables,Havells India Ltd,HAVELLS
+NIFTY Consumer Durables,Dixon Technologies (India) Ltd,DIXON
+NIFTY Consumer Durables,Kalyan Jewellers India Ltd,KALYANKJIL
+NIFTY Consumer Durables,Voltas Ltd,VOLTAS
+NIFTY Consumer Durables,Blue Star Ltd,BLUESTAR
+NIFTY Consumer Durables,Amber Enterprises India Ltd,AMBER
+NIFTY Consumer Durables,Century Plyboards (India) Ltd,CENTURYPLY
+NIFTY Consumer Durables,Crompton Greaves Cons Elec Ltd,CROMPTON
+NIFTY Consumer Durables,Kajaria Ceramics Ltd,KAJARIACER
+NIFTY Consumer Durables,PG Electroplast Ltd,PGELECTRO
+NIFTY Consumer Durables,V-Guard Industries Ltd,VGUARD
+NIFTY Consumer Durables,Whirlpool of India Ltd,WHIRLPOOL
+NIFTY Consumer Durables,Bata India Ltd,BATAINDIA
+NIFTY Consumer Durables,Cera Sanitaryware Ltd,CERASANIT
+NIFTY Oil & Gas,Reliance Industries Ltd,RELIANCE
+NIFTY Oil & Gas,Oil & Natural Gas Corporation Ltd,ONGC
+NIFTY Oil & Gas,Indian Oil Corporation Ltd,IOC
+NIFTY Oil & Gas,Bharat Petroleum Corporation Ltd,BPCL
+NIFTY Oil & Gas,GAIL (India) Ltd,GAIL
+NIFTY Oil & Gas,Hindustan Petroleum Corporation Ltd,HPCL
+NIFTY Oil & Gas,Oil India Ltd,OIL
+NIFTY Oil & Gas,Adani Total Gas Ltd,ATGL
+NIFTY Oil & Gas,Petronet LNG Ltd,PETRONET
+NIFTY Oil & Gas,Indraprastha Gas Ltd,IGL
+NIFTY Oil & Gas,Gujarat Gas Ltd,GUJGASLTD
+NIFTY Oil & Gas,Aegis Logistics Ltd,AEGISLOG
+NIFTY Oil & Gas,Castrol India Ltd,CASTROLIND
+NIFTY Oil & Gas,Gujarat State Petronet Ltd,GSPL
+NIFTY Private Bank,HDFC Bank Ltd,HDFCBANK
+NIFTY Private Bank,ICICI Bank Ltd,ICICIBANK
+NIFTY Private Bank,Kotak Mahindra Bank Ltd,KOTAKBANK
+NIFTY Private Bank,Axis Bank Ltd,AXISBANK
+NIFTY Private Bank,IndusInd Bank Ltd,INDUSINBK
+NIFTY Private Bank,Federal Bank Ltd,FEDERALBNK
+NIFTY Private Bank,IDFC First Bank Ltd,IDFCFIRSTB
+NIFTY Private Bank,Yes Bank Ltd,YESBANK
+NIFTY Private Bank,RBL Bank Ltd,RBLBANK
+NIFTY Private Bank,Bandhan Bank Ltd,BANDHANBNK
+NIFTY Bank,AU Small Finance Bank Ltd,AUBANK
+NIFTY PSU Bank,State Bank of India,SBIN
+NIFTY PSU Bank,Bank of Baroda,BANKBARODA
+NIFTY PSU Bank,Canara Bank,CANBK
+NIFTY PSU Bank,Punjab National Bank,PNB
+NIFTY PSU Bank,Union Bank of India,UNIONBANK
+NIFTY PSU Bank,Indian Bank,INDIANB
+NIFTY PSU Bank,Bank of India,BANKINDIA
+NIFTY PSU Bank,Bank of Maharashtra,MAHABANK
+NIFTY PSU Bank,Indian Overseas Bank,IOB
+NIFTY PSU Bank,Central Bank of India,CENTRALBK
+NIFTY Textile,Page Industries Ltd,PAGEIND
+NIFTY Financial Services,HDFC Asset Management Company Ltd,HDFCAMC
+NIFTY Financial Services,Aditya Birla Capital Ltd,ABCAPITAL
+NIFTY Financial Services,Angel One Ltd,ANGELONE
+NIFTY Financial Services,BSE Ltd,BSE
+NIFTY Financial Services,Central Depository Services (I) Ltd,CDSL
+NIFTY Financial Services,ICICI Lombard General Ins Co Ltd,ICICIGI
+NIFTY Financial Services,Indian Energy Exchange Ltd,IEX
+NIFTY Financial Services,IIFL Finance Ltd,IIFL
+NIFTY Financial Services,Jio Financial Services Ltd,JIOFIN
+NIFTY Financial Services,KFin Technologies Ltd,KFINTECH
+NIFTY Financial Services,LIC Housing Finance Ltd,LICHSGFIN
+NIFTY Financial Services,Life Insurance Corporation of India,LICI
+NIFTY Financial Services,L&T Finance Ltd,LTF
+NIFTY Financial Services,Manappuram Finance Ltd,MANAPPURAM
+NIFTY Financial Services,Multi Commodity Exchange of India Ltd,MCX
+NIFTY Financial Services,Nuvama Wealth Management Ltd,NUVAMA
+NIFTY Financial Services,One 97 Communications Ltd (Paytm),PAYTM
+NIFTY Financial Services,PNB Housing Finance Ltd,PNBHOUSING
+NIFTY Financial Services,PB Fintech Ltd (Policybazaar),POLICYBZR
+NIFTY Financial Services,SBI Cards and Payment Services Ltd,SBICARD
+NIFTY Financial Services,360 ONE WAM Ltd,360ONE
+NIFTY Bank,IndusInd Bank Ltd,INDUSINDBK
+NIFTY IT,Computer Age Mgt Services Ltd,CAMS
+NIFTY IT,Cyient Ltd,CYIENT
+NIFTY IT,KPIT Technologies Ltd,KPITTECH
+NIFTY IT,Tata Elxsi Ltd,TATAELXSI
+NIFTY Auto,Samvardhana Motherson International Ltd,MOTHERSON
+NIFTY Pharma,Mankind Pharma Ltd,MANKIND
+NIFTY Pharma,Piramal Pharma Ltd,PPLPHARMA
+NIFTY FMCG,Jubilant Foodworks Ltd,JUBLFOOD
+NIFTY FMCG,Trent Ltd,TRENT
+NIFTY FMCG,United Spirits Ltd,UNITDSPR
+NIFTY Metal,Tata Chemicals Ltd,TATACHEM
+NIFTY Metal,Vedanta Ltd,VEDL
+NIFTY Energy,Adani Energy Solutions Ltd,ADANIENSOL
+NIFTY Energy,Coal India Ltd,COALINDIA
+NIFTY Energy,JSW Energy Ltd,JSWENERGY
+NIFTY Energy,Suzlon Energy Ltd,SUZLON
+NIFTY Energy,Torrent Power Ltd,TORNTPOWER
+NIFTY Oil & Gas,Hindustan Petroleum Corporation Ltd,HINDPETRO
+NIFTY Realty,Housing & Urban Development Corp Ltd,HUDCO
+NIFTY Infrastructure,Ambuja Cements Ltd,AMBUJACEM
+NIFTY Infrastructure,APL Apollo Tubes Ltd,APLAPOLLO
+NIFTY Infrastructure,Bharat Heavy Electricals Ltd,BHEL
+NIFTY Infrastructure,Dalmia Bharat Ltd,DALBHARAT
+NIFTY Infrastructure,Eternal Healthcare Ltd,ETERNAL
+NIFTY Infrastructure,GMR Airports Infrastructure Ltd,GMRAIRPORT
+NIFTY Infrastructure,Grasim Industries Ltd,GRASIM
+NIFTY Infrastructure,HFCL Ltd,HFCL
+NIFTY Infrastructure,Indian Hotels Company Ltd,INDHOTEL
+NIFTY Infrastructure,Larsen & Toubro Ltd,LT
+NIFTY Infrastructure,NCC Ltd,NCC
+NIFTY Infrastructure,Rail Vikas Nigam Ltd,RVNL
+NIFTY Infrastructure,Shree Cement Ltd,SHREECEM
+NIFTY Infrastructure,UltraTech Cement Ltd,ULTRACEMCO
+NIFTY Infrastructure,UPL Ltd,UPL
+NIFTY PSE,Indian Renewable Energy Dev Ag Ltd,IREDA
+NIFTY PSE,Indian Railway Finance Corporation Ltd,IRFC
+NIFTY PSE,NBCC (India) Ltd,NBCC
+NIFTY Consumer Durables,Asian Paints Ltd,ASIANPAINT
+NIFTY Consumer Durables,Astral Ltd,ASTRAL
+NIFTY Consumer Durables,Blue Star Ltd,BLUESTARCO
+NIFTY Consumer Durables,Pidilite Industries Ltd,PIDILITIND
+NIFTY Consumer Durables,PG Electroplast Ltd,PGEL
+NIFTY Consumer Durables,Polycab India Ltd,POLYCAB
+NIFTY Consumer Durables,Supreme Industries Ltd,SUPREMEIND
+NIFTY Airlines/Logistics,Container Corporation of India Ltd,CONCOR
+NIFTY Airlines/Logistics,Delhivery Ltd,DELHIVERY
+NIFTY Airlines/Logistics,Indian Railway Catering and Tourism Corp Ltd,IRCTC
+NIFTY Airlines/Logistics,Tata Technologies Ltd,TATATECH
+NIFTY Airlines/Logistics,Titagarh RailSystems Ltd,TITAGARH
+NIFTY Industrial,ABB India Ltd,ABB
+NIFTY Industrial,CG Power and Industrial Solutions Ltd,CGPOWER
+NIFTY Industrial,Cummins India Ltd,CUMMINSIND
+NIFTY Industrial,KEI Industries Ltd,KEI
+NIFTY Industrial,Siemens Ltd,SIEMENS
+NIFTY Industrial,Solar Industries India Ltd,SOLARINDS
+NIFTY Industrial,SRF Ltd,SRF
+NIFTY Telecom,Bharti Airtel Ltd,BHARTIARTL
+NIFTY Telecom,Vodafone Idea Ltd,IDEA
+NIFTY Telecom,Indus Towers Ltd,INDUSTOWER
+NIFTY Diversified,Adani Ports and Special Economic Zone Ltd,ADANIPORTS
+NIFTY Diversified,PI Industries Ltd,PIIND
+NIFTY Defense,Bharat Dynamics Ltd,BDL
+NIFTY Defense,Bharat Electronics Ltd,BEL
+NIFTY Defense,Hindustan Aeronautics Ltd,HAL
+NIFTY Defense,Mazagon Dock Shipbuilders Ltd,MAZDOCK
+NIFTY Services,Avenue Supermarts Ltd (DMART),DMART
+NIFTY Services,Info Edge (India) Ltd,NAUKRI
+NIFTY Services,FSN E-Commerce Ventures Ltd (Nykaa),NYKAA
+NIFTY Aviation,InterGlobe Aviation Ltd (Indigo),INDIGO
+NIFTY Others (Thematic/Niche),Inox Wind Ltd,INOXWIND
+NIFTY Others (Thematic/Niche),Kaynes Technology India Ltd,KAYNES

@@ -380,91 +380,55 @@ def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_pat
             workbook  = writer.book
             worksheet = writer.sheets['Rollover Data']
 
-            # --- AUTO-FIT COLUMN WIDTHS ---
-            # Set column widths based on the maximum length of the data in each column
-            for i, col in enumerate(final_df.columns):
-                # Calculate the max length of data + 2 for a little padding
-                # If the column is empty, max_len will be 0, so we default to header length.
-                try:
-                    # Get the maximum length of the string representation of all items in the column
-                    max_len = max(final_df[col].astype(str).str.len().max(), len(col)) + 2
-                except:
-                    # Fallback if the column contains un-stringable data or is empty
-                    max_len = len(col) + 2
-                    # Constrain max width to prevent extremely wide columns
-                max_len = min(max_len, 50)
+            # --- Filtering and Writing to New Sheets ---
 
-                # if i == 0:
-                #     max_len = max_len + 5
+            # 1. Long Rolls
+            long_rolls_df = final_df[(final_df['M_o_M%'] > 0) & (final_df['Diff Rollover%'] > 0) & (final_df['Diff Rollover Cost'] > 0)]
+            long_rolls_df.to_excel(writer, sheet_name='Long Rolls', index=False, float_format='%.2f', startrow=4)
+            worksheet_lr = writer.sheets['Long Rolls']
+            # worksheet_lr.write(0, 0, "Long Rolls (MoM+ , %Roll+ , Cost+)", green_format)
+            # worksheet_lr.write(1, 0, "Short Rolls (MoM- , %Roll+ , Cost-)", red_format)
+            # worksheet_lr.write(2, 0, "Short Covering (MoM+ , %Roll- , Cost+)", light_green_format)
+            # worksheet_lr.write(3, 0, "Long Unwind (MoM- , %Roll- , Cost-)", light_red_format)
+            # worksheet_lr.freeze_panes(5, 2)
 
-                # Set the width for the current column (i, i are start and end columns)
-                worksheet.set_column(i, i, max_len)
 
-            # Define the green format for highlighting
-            green_format = workbook.add_format({
-                'bg_color': '#C6EFCE',
-                'font_color': '#006100'
-            })
-            light_green_format = workbook.add_format({
-                'bg_color': '#EEFBF0',
-                'font_color': '#006100'
-            })
+            # 2. Short Rolls
+            short_rolls_df = final_df[(final_df['M_o_M%'] < 0) & (final_df['Diff Rollover%'] > 0) & (final_df['Diff Rollover Cost'] < 0)]
+            short_rolls_df.to_excel(writer, sheet_name='Short Rolls', index=False, float_format='%.2f', startrow=4)
+            worksheet_sr = writer.sheets['Short Rolls']
+            # worksheet_sr.write(0, 0, "Long Rolls (MoM+ , %Roll+ , Cost+)", green_format)
+            # worksheet_sr.write(1, 0, "Short Rolls (MoM- , %Roll+ , Cost-)", red_format)
+            # worksheet_sr.write(2, 0, "Short Covering (MoM+ , %Roll- , Cost+)", light_green_format)
+            # worksheet_sr.write(3, 0, "Long Unwind (MoM- , %Roll- , Cost-)", light_red_format)
+            # worksheet_sr.freeze_panes(5, 2)
 
-            # Define the red format for highlighting
-            red_format = workbook.add_format({
-                'bg_color': '#FFC7CE',
-                'font_color': '#9C0006'
-            })
-            light_red_format = workbook.add_format({
-                'bg_color': '#FFEBF0',
-                'font_color': '#9C0006'
-            })
+            # 3. Short Covering
+            short_covering_df = final_df[(final_df['M_o_M%'] > 0) & (final_df['Diff Rollover%'] < 0) & (final_df['Diff Rollover Cost'] > 0)]
+            short_covering_df.to_excel(writer, sheet_name='Short Covering', index=False, float_format='%.2f', startrow=4)
+            worksheet_sc = writer.sheets['Short Covering']
+            # worksheet_sc.write(0, 0, "Long Rolls (MoM+ , %Roll+ , Cost+)", green_format)
+            # worksheet_sc.write(1, 0, "Short Rolls (MoM- , %Roll+ , Cost-)", red_format)
+            # worksheet_sc.write(2, 0, "Short Covering (MoM+ , %Roll- , Cost+)", light_green_format)
+            # worksheet_sc.write(3, 0, "Long Unwind (MoM- , %Roll- , Cost-)", light_red_format)
+            # worksheet_sc.freeze_panes(5, 2)
 
-            worksheet.freeze_panes(5, 2)
-            worksheet.write(0, 0, "Long Rolls (MoM+ , %Roll+ , Cost+)", green_format)
-            worksheet.write(1, 0, "Short Rolls (MoM- , %Roll+ , Cost-)", red_format)
-            worksheet.write(2, 0, "Short Covering (MoM+ , %Roll- , Cost+)", light_green_format)
-            worksheet.write(3, 0, "Long Unwind (MoM- , %Roll- , Cost-)", light_red_format)
 
-            # Define the conditional formatting rule
-            # Data starts from row 2 (header in row 1).
-            # Columns (1-indexed for Excel):
-            # M_o_M% is column C (index 2)
-            # Diff Rollover% is column J (index 9)
-            # Diff Rollover Cost is column K (index 10)
+            # 4. Long Unwind
+            long_unwind_df = final_df[(final_df['M_o_M%'] < 0) & (final_df['Diff Rollover%'] < 0) & (final_df['Diff Rollover Cost'] < 0)]
+            long_unwind_df.to_excel(writer, sheet_name='Long Unwind', index=False, float_format='%.2f', startrow=4)
+            worksheet_lu = writer.sheets['Long Unwind']
+            # worksheet_lu.write(0, 0, "Long Rolls (MoM+ , %Roll+ , Cost+)", green_format)
+            # worksheet_lu.write(1, 0, "Short Rolls (MoM- , %Roll+ , Cost-)", red_format)
+            # worksheet_lu.write(2, 0, "Short Covering (MoM+ , %Roll- , Cost+)", light_green_format)
+            # worksheet_lu.write(3, 0, "Long Unwind (MoM- , %Roll- , Cost-)", light_red_format)
+            # worksheet_lu.freeze_panes(5, 2)
 
-            max_row = len(final_df)
-            max_col = len(final_df.columns)
-            # The range covers all data cells (from A2 to the last data cell)
-            data_range = f'A6:{xl_rowcol_to_cell(max_row, max_col - 1)}'
-
-            # The formula checks cell values in the *current* row (relative to A2)
-            formula_green = '=AND($L6>0, $J6>0, $K6>0)'
-            formula_red = '=AND($L6<0, $J6>0, $K6<0)'
-            formula_light_green = '=AND($L6>0, $J6<0, $K6>0)'
-            formula_light_red = '=AND($L6<0, $J6<0, $K6<0)'
-
-            # Apply the conditional format to the entire data range
-            worksheet.conditional_format(data_range, {
-                'type': 'formula',
-                'criteria': formula_green,
-                'format': green_format
-            })
-            worksheet.conditional_format(data_range, {
-                'type': 'formula',
-                'criteria': formula_red,
-                'format': red_format
-            })
-            worksheet.conditional_format(data_range, {
-                'type': 'formula',
-                'criteria': formula_light_red,
-                'format': light_red_format
-            })
-            worksheet.conditional_format(data_range, {
-                'type': 'formula',
-                'criteria': formula_light_green,
-                'format': light_green_format
-            })
+            apply_worksheet_formatting (final_df, worksheet, workbook)
+            apply_worksheet_formatting (long_rolls_df, worksheet_lr, workbook)
+            apply_worksheet_formatting (short_rolls_df, worksheet_sr, workbook)
+            apply_worksheet_formatting (short_covering_df, worksheet_sc, workbook)
+            apply_worksheet_formatting (long_unwind_df, worksheet_lu, workbook)
 
             # Close the Pandas Excel writer and output the Excel file.
             writer.close()
@@ -523,6 +487,95 @@ def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_pat
 #     # Save the changes to the workbook
 #     wb.save(filename)
 #     print(f"Legend added to {filename}")
+
+def apply_worksheet_formatting(final_df, worksheet, workbook):
+    # --- AUTO-FIT COLUMN WIDTHS ---
+    # Set column widths based on the maximum length of the data in each column
+    for i, col in enumerate(final_df.columns):
+        # Calculate the max length of data + 2 for a little padding
+        # If the column is empty, max_len will be 0, so we default to header length.
+        try:
+            # Get the maximum length of the string representation of all items in the column
+            max_len = max(final_df[col].astype(str).str.len().max(), len(col)) + 2
+        except:
+            # Fallback if the column contains un-stringable data or is empty
+            max_len = len(col) + 2
+            # Constrain max width to prevent extremely wide columns
+        max_len = min(max_len, 50)
+
+        # if i == 0:
+        #     max_len = max_len + 5
+
+        # Set the width for the current column (i, i are start and end columns)
+        worksheet.set_column(i, i, max_len)
+
+    worksheet.set_column(0, 0, 35)
+
+    # Define the green format for highlighting
+    green_format = workbook.add_format({
+        'bg_color': '#C6EFCE',
+        'font_color': '#006100'
+    })
+    light_green_format = workbook.add_format({
+        'bg_color': '#EEFBF0',
+        'font_color': '#006100'
+    })
+
+    # Define the red format for highlighting
+    red_format = workbook.add_format({
+        'bg_color': '#FFC7CE',
+        'font_color': '#9C0006'
+    })
+    light_red_format = workbook.add_format({
+        'bg_color': '#FFEBF0',
+        'font_color': '#9C0006'
+    })
+
+    worksheet.freeze_panes(5, 2)
+    worksheet.write(0, 0, "Long Rolls (MoM+ , %Roll+ , Cost+)", green_format)
+    worksheet.write(1, 0, "Short Rolls (MoM- , %Roll+ , Cost-)", red_format)
+    worksheet.write(2, 0, "Short Covering (MoM+ , %Roll- , Cost+)", light_green_format)
+    worksheet.write(3, 0, "Long Unwind (MoM- , %Roll- , Cost-)", light_red_format)
+
+    # Define the conditional formatting rule
+    # Data starts from row 2 (header in row 1).
+    # Columns (1-indexed for Excel):
+    # M_o_M% is column C (index 2)
+    # Diff Rollover% is column J (index 9)
+    # Diff Rollover Cost is column K (index 10)
+
+    max_row = len(final_df)
+    max_col = len(final_df.columns)
+    # The range covers all data cells (from A6 to the last data cell)
+    data_range = f'A6:{xl_rowcol_to_cell(max_row+4, max_col - 1)}'
+
+    # The formula checks cell values in the *current* row (relative to A2)
+    formula_green = '=AND($L6>0, $J6>0, $K6>0)'
+    formula_red = '=AND($L6<0, $J6>0, $K6<0)'
+    formula_light_green = '=AND($L6>0, $J6<0, $K6>0)'
+    formula_light_red = '=AND($L6<0, $J6<0, $K6<0)'
+
+    # Apply the conditional format to the entire data range
+    worksheet.conditional_format(data_range, {
+        'type': 'formula',
+        'criteria': formula_green,
+        'format': green_format
+    })
+    worksheet.conditional_format(data_range, {
+        'type': 'formula',
+        'criteria': formula_red,
+        'format': red_format
+    })
+    worksheet.conditional_format(data_range, {
+        'type': 'formula',
+        'criteria': formula_light_red,
+        'format': light_red_format
+    })
+    worksheet.conditional_format(data_range, {
+        'type': 'formula',
+        'criteria': formula_light_green,
+        'format': light_green_format
+    })
 
 def get_last_weekday_of_month(year, month, weekday):
     """

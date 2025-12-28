@@ -150,7 +150,7 @@ def calculate_averages(folder1_path, current_month_symbol_map, curr_month_year):
 
 # --- Main Logic ---
 
-def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_path, file4_path, file5_path_prev):
+def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_path, file4_path, file5_path_prev, curr_date_6, prev_date_6, next_date_6):
     """
     Main function to process financial files and generate the rollover report.
     """
@@ -400,7 +400,8 @@ def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_pat
 
             # 1. Long Rolls
             long_rolls_df = final_df[(final_df['M_o_M%'] > 0) & (final_df['Diff Rollover%'] > 0) & (final_df['Diff Rollover Cost'] > 0)]
-            long_rolls_df.to_excel(writer, sheet_name='Long Rolls', index=False, float_format='%.2f', startrow=4)
+            long_rolls_df_sorted = long_rolls_df.sort_values(by=['Diff Rollover Cost', 'Diff Rollover%', 'M_o_M%'], ascending=[False, False, False])
+            long_rolls_df_sorted.to_excel(writer, sheet_name='Long Rolls', index=False, float_format='%.2f', startrow=4)
             worksheet_lr = writer.sheets['Long Rolls']
             # worksheet_lr.write(0, 0, "Long Rolls (MoM+ , %Roll+ , Cost+)", green_format)
             # worksheet_lr.write(1, 0, "Short Rolls (MoM- , %Roll+ , Cost-)", red_format)
@@ -411,7 +412,8 @@ def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_pat
 
             # 2. Short Rolls
             short_rolls_df = final_df[(final_df['M_o_M%'] < 0) & (final_df['Diff Rollover%'] > 0) & (final_df['Diff Rollover Cost'] < 0)]
-            short_rolls_df.to_excel(writer, sheet_name='Short Rolls', index=False, float_format='%.2f', startrow=4)
+            short_rolls_df_sorted = short_rolls_df.sort_values(by=['Diff Rollover%', 'Diff Rollover Cost', 'M_o_M%'], ascending=[False, True, True])
+            short_rolls_df_sorted.to_excel(writer, sheet_name='Short Rolls', index=False, float_format='%.2f', startrow=4)
             worksheet_sr = writer.sheets['Short Rolls']
             # worksheet_sr.write(0, 0, "Long Rolls (MoM+ , %Roll+ , Cost+)", green_format)
             # worksheet_sr.write(1, 0, "Short Rolls (MoM- , %Roll+ , Cost-)", red_format)
@@ -421,7 +423,8 @@ def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_pat
 
             # 3. Short Covering
             short_covering_df = final_df[(final_df['M_o_M%'] > 0) & (final_df['Diff Rollover%'] < 0) & (final_df['Diff Rollover Cost'] > 0)]
-            short_covering_df.to_excel(writer, sheet_name='Short Covering', index=False, float_format='%.2f', startrow=4)
+            short_covering_df_sorted = short_covering_df.sort_values(by=['M_o_M%', 'Diff Rollover Cost', 'Diff Rollover%'], ascending=[False, False, True])
+            short_covering_df_sorted.to_excel(writer, sheet_name='Short Covering', index=False, float_format='%.2f', startrow=4)
             worksheet_sc = writer.sheets['Short Covering']
             # worksheet_sc.write(0, 0, "Long Rolls (MoM+ , %Roll+ , Cost+)", green_format)
             # worksheet_sc.write(1, 0, "Short Rolls (MoM- , %Roll+ , Cost-)", red_format)
@@ -432,7 +435,8 @@ def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_pat
 
             # 4. Long Unwind
             long_unwind_df = final_df[(final_df['M_o_M%'] < 0) & (final_df['Diff Rollover%'] < 0) & (final_df['Diff Rollover Cost'] < 0)]
-            long_unwind_df.to_excel(writer, sheet_name='Long Unwind', index=False, float_format='%.2f', startrow=4)
+            long_unwind_df_sorted = long_unwind_df.sort_values(by=['M_o_M%', 'Diff Rollover Cost', 'Diff Rollover%'], ascending=[True, True, True])
+            long_unwind_df_sorted.to_excel(writer, sheet_name='Long Unwind', index=False, float_format='%.2f', startrow=4)
             worksheet_lu = writer.sheets['Long Unwind']
             # worksheet_lu.write(0, 0, "Long Rolls (MoM+ , %Roll+ , Cost+)", green_format)
             # worksheet_lu.write(1, 0, "Short Rolls (MoM- , %Roll+ , Cost-)", red_format)
@@ -440,11 +444,11 @@ def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_pat
             # worksheet_lu.write(3, 0, "Long Unwind (MoM- , %Roll- , Cost-)", light_red_format)
             # worksheet_lu.freeze_panes(5, 2)
 
-            apply_worksheet_formatting (final_df, worksheet, workbook)
-            apply_worksheet_formatting (long_rolls_df, worksheet_lr, workbook)
-            apply_worksheet_formatting (short_rolls_df, worksheet_sr, workbook)
-            apply_worksheet_formatting (short_covering_df, worksheet_sc, workbook)
-            apply_worksheet_formatting (long_unwind_df, worksheet_lu, workbook)
+            apply_worksheet_formatting (final_df, worksheet, workbook, curr_date_6, prev_date_6, next_date_6)
+            apply_worksheet_formatting (long_rolls_df, worksheet_lr, workbook, curr_date_6, prev_date_6, next_date_6)
+            apply_worksheet_formatting (short_rolls_df, worksheet_sr, workbook, curr_date_6, prev_date_6, next_date_6)
+            apply_worksheet_formatting (short_covering_df, worksheet_sc, workbook, curr_date_6, prev_date_6, next_date_6)
+            apply_worksheet_formatting (long_unwind_df, worksheet_lu, workbook, curr_date_6, prev_date_6, next_date_6)
 
             # Close the Pandas Excel writer and output the Excel file.
             writer.close()
@@ -504,7 +508,7 @@ def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_pat
 #     wb.save(filename)
 #     print(f"Legend added to {filename}")
 
-def apply_worksheet_formatting(final_df, worksheet, workbook):
+def apply_worksheet_formatting(final_df, worksheet, workbook, curr_date_6, prev_date_6, next_date_6):
     # --- AUTO-FIT COLUMN WIDTHS ---
     # Set column widths based on the maximum length of the data in each column
     for i, col in enumerate(final_df.columns):
@@ -552,6 +556,13 @@ def apply_worksheet_formatting(final_df, worksheet, workbook):
     worksheet.write(1, 0, "Short Rolls (MoM- , %Roll+ , Cost-)", red_format)
     worksheet.write(2, 0, "Short Covering (MoM+ , %Roll- , Cost+)", light_green_format)
     worksheet.write(3, 0, "Long Unwind (MoM- , %Roll- , Cost-)", light_red_format)
+
+    worksheet.write(0, 1, "Current Date")
+    worksheet.write(0, 2, curr_date_6)
+    worksheet.write(1, 1, "Prev Date")
+    worksheet.write(1, 2, prev_date_6)
+    worksheet.write(2, 1, "Next Date")
+    worksheet.write(2, 2, next_date_6)
 
     # Define the conditional formatting rule
     # Data starts from row 2 (header in row 1).
@@ -809,4 +820,4 @@ if __name__ == '__main__':
     print(file4_resolved)
     print(file5_resolved)
 
-    generate_rollover_report(folder1, folder2, file1_resolved, file2_resolved, file3_resolved, file4_resolved, file5_resolved)
+    generate_rollover_report(folder1, folder2, file1_resolved, file2_resolved, file3_resolved, file4_resolved, file5_resolved, curr_date_6, prev_date_6, next_date_6)

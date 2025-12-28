@@ -150,7 +150,7 @@ def calculate_averages(folder1_path, current_month_symbol_map, curr_month_year):
 
 # --- Main Logic ---
 
-def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_path, file4_path):
+def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_path, file4_path, file5_path_prev):
     """
     Main function to process financial files and generate the rollover report.
     """
@@ -163,6 +163,9 @@ def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_pat
     file2_path = Path(file2_path)
     file3_path = Path(file3_path)
     file4_path = Path(file4_path)
+    file5_path = file5_path_prev
+    if file5_path_prev != "":
+        file5_path = Path(file5_path_prev)
 
     if not folder1_path.exists():
         folder1_path.mkdir(parents=True, exist_ok=True)
@@ -272,10 +275,19 @@ def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_pat
         prev_spot_df.rename(columns={'CLOSE_PRICE': 'PrevMonthSpot'}, inplace=True)
         prev_spot_df = prev_spot_df[prev_spot_df['SYMBOL'].isin(final_df.index)].set_index('SYMBOL')
 
+        print(f"Reading next month spot data from {file5_path}...")
+        if file5_path != "":
+            next_spot_df = pd.read_csv(file5_path, usecols=['SYMBOL', 'CLOSE_PRICE'], skipinitialspace=True)
+            next_spot_df.rename(columns={'CLOSE_PRICE': 'NextMonthSpot'}, inplace=True)
+            next_spot_df = next_spot_df[next_spot_df['SYMBOL'].isin(final_df.index)].set_index('SYMBOL')
+
         print("EHY")
         # Merge spot data into the final results
         final_df = final_df.join(spot_df, how='inner')
         final_df = final_df.join(prev_spot_df, how='inner')
+        if file5_path != "":
+            final_df = final_df.join(next_spot_df, how='inner')
+
         print("EHY")
 
         # --- File 4: Sectoral Index Merge (Updated to use left join) ---
@@ -309,6 +321,10 @@ def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_pat
         # Formula: (CLOSE_PRICE in file2 (Spot) - CLOSE_PRIC in file3 (Prev Month Close)) / (CLOSE_PRIC in file3 (Prev Month Close)) * 100
         final_df['M_o_M%'] = (final_df['Spot'] - final_df['PrevMonthSpot']) / final_df['PrevMonthSpot'] * 100
         final_df.drop(columns=['Curr Month Close', 'PrevMonthSpot'], inplace=True)
+        final_df['Next_M_o_M%'] = 0
+        if file5_path != "":
+            final_df['Next_M_o_M%'] = (final_df['NextMonthSpot'] - final_df['Spot']) / final_df['Spot'] * 100
+            final_df.drop(columns=['NextMonthSpot'], inplace=True)
 
 
         # 3. Read Historical Averages
@@ -340,7 +356,7 @@ def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_pat
 
         # List of columns to be rounded
         rounding_cols = [
-            'Spot', 'M_o_M%', 'Future Price', 'Basis', 'Rollover%',
+            'Spot', 'M_o_M%', 'Next_M_o_M%', 'Future Price', 'Basis', 'Rollover%',
             'Avg. Roll Over', 'Rollover cost', 'Avg. Rollover Cost',
             'Diff Rollover%', 'Diff Rollover Cost'
         ]
@@ -357,7 +373,7 @@ def generate_rollover_report(folder1, folder2, file1_path, file2_path, file3_pat
         output_columns = [
             'Sectoral Index', 'Symbol', 'Spot', 'Future Price', 'Basis', 'Rollover%',
             'Avg. Roll Over', 'Rollover cost', 'Avg. Rollover Cost', 
-            'Diff Rollover%', 'Diff Rollover Cost', 'M_o_M%'
+            'Diff Rollover%', 'Diff Rollover Cost', 'M_o_M%', 'Next_M_o_M%'
         ]
 
         print("DONE2")
@@ -592,7 +608,7 @@ def get_last_weekday_of_month(year, month, weekday):
             return target_date
     return None
 
-def calculate_expiry_date(year, month):
+def calculate_expiry_date(year, month, give_error):
     """
     Calculates the expiry date (last Thursday or last Tuesday) for a given month/year.
     """
@@ -615,7 +631,7 @@ def calculate_expiry_date(year, month):
 
     current_datetime = datetime.now()
 
-    if current_datetime < expiry_date:
+    if current_datetime < expiry_date and give_error:
         raise ValueError(f"Current date {current_datetime} is less than expiry date for {expiry_date}")
 
     return expiry_date
@@ -639,7 +655,7 @@ def get_curr_and_prev_month_dates(input_month_year):
     curr_month = current_month_dt.month
 
     # Calculate Current Month Date
-    curr_month_expiry = calculate_expiry_date(curr_year, curr_month)
+    curr_month_expiry = calculate_expiry_date(curr_year, curr_month, True)
     curr_month_date_6 = curr_month_expiry.strftime('%d%m%y')
     curr_month_date_8 = curr_month_expiry.strftime('%d%m%Y')
 
@@ -653,19 +669,32 @@ def get_curr_and_prev_month_dates(input_month_year):
         prev_month = curr_month - 1
         prev_year = curr_year
 
-    prev_month_expiry = calculate_expiry_date(prev_year, prev_month)
+    if curr_month == 12:
+        next_month = 1
+        next_year = curr_year + 1
+    else:
+        next_month = curr_month + 1
+        next_year = curr_year
+
+    prev_month_expiry = calculate_expiry_date(prev_year, prev_month, True)
     prev_month_date_6 = prev_month_expiry.strftime('%d%m%y')
     prev_month_date_8 = prev_month_expiry.strftime('%d%m%Y')
+
+    next_month_expiry = calculate_expiry_date(next_year, next_month, False)
+    next_month_date_6 = next_month_expiry.strftime('%d%m%y')
+    next_month_date_8 = next_month_expiry.strftime('%d%m%Y')
 
     return {
         'curr_6': curr_month_date_6,
         'curr_8': curr_month_date_8,
         'prev_6': prev_month_date_6,
         'prev_8': prev_month_date_8,
+        'next_6': next_month_date_6,
+        'next_8': next_month_date_8,
         'current_month_name': curr_month_expiry.strftime('%b%Y')
     }
 
-def try_file_read(file_path_6, file_path_8, file_type):
+def try_file_read(file_path_6, file_path_8, file_type, give_empty_string):
     """Tries to read or generate a file using DDMMYY, falls back to DDMMYYYY."""
     path_6 = Path(file_path_6)
     path_8 = Path(file_path_8)
@@ -680,6 +709,8 @@ def try_file_read(file_path_6, file_path_8, file_type):
 
     # 3. If neither exists, generate mock data (for demonstration purposes)
     else:
+        if give_empty_string:
+            return ""
         raise FileNotFoundError(f"Could not generate or find file for type {file_type} at {path_6} or {path_8}")
 
 if __name__ == '__main__':
@@ -738,6 +769,7 @@ if __name__ == '__main__':
 
     curr_date_6, curr_date_8 = dates['curr_6'], dates['curr_8']
     prev_date_6, prev_date_8 = dates['prev_6'], dates['prev_8']
+    next_date_6, next_date_8 = dates['next_6'], dates['next_8']
 
     # 2. Define standard folder and file names
     folder1 = "generated_data"
@@ -747,10 +779,12 @@ if __name__ == '__main__':
     file1_6 = f"fo_data/fo{curr_date_6}.csv"
     file2_6 = f"equity_data/sec_bhavdata_full_{curr_date_6}.csv"
     file3_6 = f"equity_data/sec_bhavdata_full_{prev_date_6}.csv"
+    file5_6 = f"equity_data/sec_bhavdata_full_{next_date_6}.csv"
 
     file1_8 = f"fo_data/fo{curr_date_8}.csv"
     file2_8 = f"equity_data/sec_bhavdata_full_{curr_date_8}.csv"
     file3_8 = f"equity_data/sec_bhavdata_full_{prev_date_8}.csv"
+    file5_8 = f"equity_data/sec_bhavdata_full_{next_date_8}.csv"
 
     file4 = f"index.csv" # File 4 does not use date
 
@@ -758,13 +792,14 @@ if __name__ == '__main__':
     print("\n--- Generating/Locating Input Files ---")
 
     # File 1 (Futures) uses DDMMYY or DDMMYYYY format
-    file1_resolved = try_file_read(file1_6, file1_8, 'file1')
+    file1_resolved = try_file_read(file1_6, file1_8, 'file1', False)
 
     # File 2 (Current Spot) uses DDMMYY or DDMMYYYY format
-    file2_resolved = try_file_read(file2_6, file2_8, 'file2')
+    file2_resolved = try_file_read(file2_6, file2_8, 'file2', False)
 
     # File 3 (Previous Spot) uses DDMMYY or DDMMYYYY format
-    file3_resolved = try_file_read(file3_6, file3_8, 'file3')
+    file3_resolved = try_file_read(file3_6, file3_8, 'file3', False)
+    file5_resolved = try_file_read(file5_6, file5_8, 'file3', True)
 
     file4_resolved = Path(file4)
 
@@ -772,5 +807,6 @@ if __name__ == '__main__':
     print(file2_resolved)
     print(file3_resolved)
     print(file4_resolved)
+    print(file5_resolved)
 
-    generate_rollover_report(folder1, folder2, file1_resolved, file2_resolved, file3_resolved, file4_resolved)
+    generate_rollover_report(folder1, folder2, file1_resolved, file2_resolved, file3_resolved, file4_resolved, file5_resolved)
